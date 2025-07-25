@@ -1,173 +1,133 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Calculator</title>
+  <title>Simple Calculator</title>
   <style>
-
     * {
       box-sizing: border-box;
     }
+
     body {
-      margin: 0;
-      height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
       display: flex;
       justify-content: center;
       align-items: center;
-      user-select: none;
-    }
-
-    /* Outside frame */
-    .frame {
-      padding: 30px;
-      background: #ffffff;
-      border: 4px solid #6a9bcf;
-      border-radius: 30px;
-      box-shadow: 0 10px 30px rgba(106, 155, 207, 0.5);
+      height: 100vh;
     }
 
     .calculator {
-      background: #fff;
-      width: 320px;
-      border-radius: 24px;
-      padding: 30px 30px 40px;
-      box-shadow:
-        0 8px 24px rgba(0, 0, 0, 0.15),
-        inset 0 -2px 8px #f0f0f0;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      width: 300px;
     }
 
-    #display {
+    .display {
       width: 100%;
       height: 60px;
-      border-radius: 18px;
-      border: none;
-      margin-bottom: 30px;
-      padding: 0 20px;
-      font-size: 32px;
-      font-weight: 600;
       text-align: right;
-      color: #444;
-      background: #f9f9f9;
-      box-shadow:
-        inset 0 3px 8px rgba(0, 0, 0, 0.05);
-      pointer-events: none; 
+      font-size: 2rem;
+      padding: 10px;
+      border: none;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      background: #e9ecef;
     }
 
     .buttons {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
+      gap: 10px;
     }
 
-    button {
-      padding: 20px 0;
-      font-size: 22px;
-      font-weight: 600;
+    .btn {
+      padding: 20px;
+      font-size: 1.2rem;
       border: none;
-      border-radius: 18px;
-      background: linear-gradient(145deg, #e6e6e6, #ffffff);
-      box-shadow:
-        5px 5px 10px #bebebe,
-        -5px -5px 10px #ffffff;
-      color: #555;
-      cursor: not-allowed;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-    }
-
-    button:hover {
-      background: linear-gradient(145deg, #dcdcdc, #f7f7f7);
-      box-shadow:
-        3px 3px 6px #c1c1c1,
-        -3px -3px 6px #ffffff;
-    }
-
-    button:active {
-      box-shadow: inset 3px 3px 6px #bebebe,
-                  inset -3px -3px 6px #ffffff;
-    }
-
-    button:nth-child(4),
-    button:nth-child(8),
-    button:nth-child(12),
-    button:nth-child(16) {
-      background: #f6a5c0; 
+      border-radius: 10px;
+      background-color: #d6336c;
       color: white;
-      box-shadow:
-        5px 5px 10px #c87b91,
-        -5px -5px 10px #ffa8b0;
+      cursor: pointer;
+      transition: 0.2s;
     }
 
-    button:nth-child(4):hover,
-    button:nth-child(8):hover,
-    button:nth-child(12):hover,
-    button:nth-child(16):hover {
-      background: #ee8ca3;
-      box-shadow:
-        3px 3px 6px #b65f6c,
-        -3px -3px 6px #ff91a0;
+    .btn:hover {
+      background-color: #c0245c;
     }
 
-    button:nth-child(4):active,
-    button:nth-child(8):active,
-    button:nth-child(12):active,
-    button:nth-child(16):active {
-      box-shadow: inset 3px 3px 6px #c87b91,
-                  inset -3px -3px 6px #ffa8b0;
+    .btn.operator {
+      background-color: #6f42c1;
     }
 
-    button:last-child {
-      grid-column: span 4;
-      background: #6a9bcf; 
-      color: white;
-      font-weight: 700;
-      box-shadow:
-        5px 5px 12px #4d78af,
-        -5px -5px 12px #85b0f7;
-      margin-top: 15px;
+    .btn.operator:hover {
+      background-color: #5a32a3;
     }
-    button:last-child:hover {
-      background: #4d78af;
-      box-shadow:
-        3px 3px 8px #3a5f8a,
-        -3px -3px 8px #6ea5f2;
+
+    .btn.equal {
+      background-color: #28a745;
     }
-    button:last-child:active {
-      box-shadow: inset 3px 3px 8px #4d78af,
-                  inset -3px -3px 8px #85b0f7;
+
+    .btn.equal:hover {
+      background-color: #218838;
+    }
+
+    .btn.clear {
+      background-color: #dc3545;
+    }
+
+    .btn.clear:hover {
+      background-color: #c82333;
     }
   </style>
 </head>
 <body>
-  <div class="frame">
-    <div class="calculator">
-      <input type="text" id="display" placeholder="0" disabled />
-      <div class="buttons">
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button>/</button>
+  <div class="calculator">
+    <input type="text" id="display" class="display" disabled />
 
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button>*</button>
+    <div class="buttons">
+      <button class="btn" onclick="append('7')">7</button>
+      <button class="btn" onclick="append('8')">8</button>
+      <button class="btn" onclick="append('9')">9</button>
+      <button class="btn operator" onclick="append('/')">÷</button>
 
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>-</button>
+      <button class="btn" onclick="append('4')">4</button>
+      <button class="btn" onclick="append('5')">5</button>
+      <button class="btn" onclick="append('6')">6</button>
+      <button class="btn operator" onclick="append('*')">×</button>
 
-        <button>0</button>
-        <button>.</button>
-        <button>=</button>
-        <button>+</button>
+      <button class="btn" onclick="append('1')">1</button>
+      <button class="btn" onclick="append('2')">2</button>
+      <button class="btn" onclick="append('3')">3</button>
+      <button class="btn operator" onclick="append('-')">−</button>
 
-        <button>C</button>
-      </div>
+      <button class="btn" onclick="append('0')">0</button>
+      <button class="btn" onclick="append('.')">.</button>
+      <button class="btn equal" onclick="calculate()">=</button>
+      <button class="btn operator" onclick="append('+')">+</button>
+
+      <button class="btn clear" style="grid-column: span 4;" onclick="clearDisplay()">Clear</button>
     </div>
   </div>
+
+  <script>
+    function append(value) {
+      document.getElementById("display").value += value;
+    }
+
+    function clearDisplay() {
+      document.getElementById("display").value = "";
+    }
+
+    function calculate() {
+      try {
+        document.getElementById("display").value = eval(document.getElementById("display").value);
+      } catch (error) {
+        alert("Invalid expression");
+      }
+    }
+  </script>
 </body>
 </html>
